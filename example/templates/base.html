@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<header>
+    {% if user.is_authenticated %}
+        <form method="post" action="{% url 'auth_u:logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+    {% else %}
+        <a href="{% url 'auth_u:register' %}" class="btn btn-primary">Register</a>
+        <a href="{% url 'auth_u:login' %}" class="btn btn-success">Login</a>
+    {% endif %}
+</header>
+<div class="container mt-5">
+    {% block content %}{% endblock %}
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
